@@ -90,10 +90,10 @@
             let result = []
             response.forEach((item, index) => {
               result.push({
-                "creationTimestamp":item.metadata.creation_timestamp,
+                "creationTimestamp":item.metadata.creationTimestamp,
                 "name":item.metadata.name,
                 "status":item.status.conditions.pop().status ==='True'?0:1,
-                "architecture":item.status.node_info.architecture,
+                "architecture":item.status.nodeInfo.architecture,
                 "labels":item.metadata.labels
               })
             })

@@ -65,6 +65,7 @@
       initAppPie() {
         this.$store.dispatch('edge-app/getAppList').then(response => {
           let appStatusObj = {}
+          console.log(response)
           response.forEach((item, _) => {
             let status = item.status.phase === 'Running' ? "运行中" : "故障"
             if (appStatusObj.hasOwnProperty(status)) {

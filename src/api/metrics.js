@@ -10,7 +10,7 @@ import request from '@/utils/request'
 export function fetchNodeMetrics(nodename) {
   console.log(nodename)
   return request({
-    url: '/metrics/node/' + nodename + '/',
+    url: '/node/metrics/' + nodename + '/',
     method: 'get'
   })
 }

@@ -59,18 +59,18 @@
         this.$store.dispatch('edge-node/getNodeItem', this.$route.params.id)
           .then(response => {
             //获取数据返回的节点信息字段
-            let nodeinfo = response.status.node_info
+            let nodeinfo = response.status.nodeInfo
             this.nodeInfo = {
               title: '节点信息',
               content: {
                 name: response.metadata.name,
                 architecture: nodeinfo.architecture,
-                container_runtime_version: nodeinfo.container_runtime_version,
-                kernel_version: nodeinfo.kernel_version,
-                kube_proxy_version: nodeinfo.kube_proxy_version,
-                kubelet_version: nodeinfo.kubelet_version,
-                operating_system: nodeinfo.operating_system,
-                os_image: nodeinfo.os_image
+                container_runtime_version: nodeinfo.containerRuntimeVersion,
+                kernel_version: nodeinfo.kernelVersion,
+                kube_proxy_version: nodeinfo.kubeProxyVersion,
+                kubelet_version: nodeinfo.kubeletVersion,
+                operating_system: nodeinfo.operatingSystem,
+                os_image: nodeinfo.osImage
               }
             }
             this.labels = response.metadata.labels
@@ -86,13 +86,23 @@
       getNodeMetrics() {
         this.$store.dispatch('metrics/getNodeMetrics', this.$route.params.id)
           .then(response => {
-            const usage = response.usage
-            let lent = usage.memory.length
+            console.log("444",response)
+            // 2022-8-11
+            const all=response.capacity
+            console.log("all",all)
+            const usage=response.allocatable
+            // let lent=usage.
+            const noUsed = response.allocatable
+            console.log("noUsed",noUsed)
+
+            let lent = noUsed.memory.length
             //单位
-            let unit = (usage.memory).substring(lent - 2, lent)
+            let unit = (noUsed.memory).substring(lent - 2, lent)
+            let all_unit=(all.memory).substring(lent-2,lent)
             //计算使用的CPU和内存
-            this.metrics.cpu.usage = parseInt(usage.cpu)
-            this.metrics.memory.usage = parseInt(usage.memory) * UNIT_MAP[unit]
+            this.metrics.cpu.usage =parseInt(all.cpu)-parseInt(noUsed.cpu)
+            console.log(this.metrics.cpu.usage)
+            this.metrics.memory.usage = parseInt(all.memory) * UNIT_MAP[unit]-parseInt(usage.memory) * UNIT_MAP[unit]
           })
 
       },

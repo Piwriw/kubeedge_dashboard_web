@@ -52,7 +52,7 @@
         this.$store.dispatch('edge-node/getJoinToken')
           .then(response => {
             console.log(response)
-            let token = response.detail
+            let token = response
             this.cmds.forEach((item, index) => {
               //防止乱序
               if (item.id === 3) {
