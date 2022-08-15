@@ -158,7 +158,7 @@
         this.$store.dispatch('edge-device/getDeviceModelList')
           .then(response => {
             let result = []
-            response.forEach((item, index) => {
+            response.items.forEach((item, index) => {
               let properties = []
               //遍历所有的字段属性
               item.spec.properties.forEach((item_prop, index_prop) => {

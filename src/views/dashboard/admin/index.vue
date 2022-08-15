@@ -65,7 +65,7 @@
       initAppPie() {
         this.$store.dispatch('edge-app/getAppList').then(response => {
           let appStatusObj = {}
-          console.log(response)
+          // console.log(response)
           response.forEach((item, _) => {
             let status = item.status.phase === 'Running' ? "运行中" : "故障"
             if (appStatusObj.hasOwnProperty(status)) {
@@ -82,7 +82,7 @@
           let nodeArchObj = {}
           let nodeStatusObj = {}
           res.forEach((item, index) => {
-            let arch = item.status.node_info.architecture
+            let arch = item.status.nodeInfo.architecture
             let status = item.status.conditions.pop().status === 'True' ? "运行中" : "故障"
             //节点架构
             if (nodeArchObj.hasOwnProperty(arch)) {
