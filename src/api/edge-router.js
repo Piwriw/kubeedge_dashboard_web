@@ -50,6 +50,7 @@ export function deleteRuleEndPoint(data) {
 
 //创建路由规则 Rule
 export function createRule(data) {
+  console.log("data",data)
   return request({
     url: '/router/rule/',
     method: 'post',

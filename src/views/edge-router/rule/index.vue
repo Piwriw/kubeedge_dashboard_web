@@ -135,7 +135,7 @@
         this.$store.dispatch('edge-router/getRuleList')
           .then(response => {
             let result = []
-            response.forEach((item, _) => {
+            response.items.forEach((item, _) => {
               result.push(
                 {
                   name: item.metadata.name,
