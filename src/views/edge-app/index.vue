@@ -3,7 +3,7 @@
     <div class="filter-container">
       <router-link :to="'/edge-app/create'">
         <el-button class="filter-item" type="primary">
-          创建应用 <i class="el-icon-circle-plus" />
+          创建应用 <i class="el-icon-circle-plus"/>
         </el-button>
       </router-link>
     </div>
@@ -11,7 +11,7 @@
       <el-table-column prop="name" label="NAME" width="320">
         <template slot-scope="{row}">
           <svg-icon icon-class="status" style="margin-right: 10px;"
-                    :style="{color:(row.status===0)?'green':'red'}" />
+                    :style="{color:(row.status===0)?'green':'red'}"/>
           <a style="color: blue" @click="showAppDetail(row.name)">
             {{ row.name }}
           </a>
@@ -19,20 +19,20 @@
       </el-table-column>
       <el-table-column label="镜像" width="320">
         <template slot-scope="{row}">
-          <p v-for="(item,key) in row.images">{{item}}</p>
+          <p v-for="(item,key) in row.images">{{ item }}</p>
         </template>
       </el-table-column>
       <el-table-column label="标签">
         <template slot-scope="{row}">
-          <el-tag class="my-tag" v-for="(value,key,index) in row.labels">{{key}}:{{value}}</el-tag>
+          <el-tag class="my-tag" v-for="(value,key,index) in row.labels">{{ key }}:{{ value }}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="node" label="节点" width="150" />
+      <el-table-column prop="node" label="节点" width="150"/>
       <el-table-column prop="age" label="创建时间">
         <template slot-scope="{row}" style="cursor: pointer">
           <el-tooltip class="item" effect="dark" :content="row.createTime" placement="right-start">
             <el-button style="border: none;outline: none">{{ dateTimeFormat(row.createTime) }} <i
-              class="el-icon-info" /></el-button>
+              class="el-icon-info"/></el-button>
           </el-tooltip>
         </template>
       </el-table-column>
@@ -40,11 +40,11 @@
         <template slot-scope="{row}">
           <el-dropdown style="cursor: pointer" placement="bottom-start">
             <span class="el-dropdown-link">
-              <svg-icon icon-class="3points-vertical" />
+              <svg-icon icon-class="3points-vertical"/>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item @click.native="showAppDetail(row.name)">查看</el-dropdown-item>
-              <el-dropdown-item @click.native="showDeleteApp(row.name)">删除</el-dropdown-item>
+              <el-dropdown-item @click.native="showAppDetail(row.name,row.namespace)">查看</el-dropdown-item>
+              <el-dropdown-item @click.native="showDeleteApp(row.name,row.namespace)">删除</el-dropdown-item>
               <!--<el-dropdown-item>升级</el-dropdown-item>-->
               <!--<el-dropdown-item>日志</el-dropdown-item>-->
             </el-dropdown-menu>
@@ -70,87 +70,95 @@
       width="30%"
     >
       <pre>
-        {{detailContent}}
+        {{ detailContent }}
       </pre>
     </el-dialog>
   </div>
 </template>
 <script>
-  import { dateTimeFormat } from '@/utils'
-  import { Message } from 'element-ui'
+import {dateTimeFormat} from '@/utils'
+import {Message} from 'element-ui'
 
-  export default {
-    name: 'Applications',
-    data() {
-      return {
-        dialogVisible: false,
-        dialogVisible2detail: false,
-        detailContent: '',
-        list: null
+export default {
+  name: 'Applications',
+  data() {
+    return {
+      dialogVisible: false,
+      dialogVisible2detail: false,
+      detailContent: '',
+      list: null
+    }
+  },
+  created() {
+    this.getList()
+  },
+  methods: {
+    dateTimeFormat,
+    showAppDetail(name, namespace) {
+      this.dialogVisible2detail = true
+      let data = {
+        name,
+        namespace
       }
-    },
-    created() {
-      this.getList()
-    },
-    methods: {
-      dateTimeFormat,
-      showAppDetail(name) {
-        this.dialogVisible2detail = true
-        this.$store.dispatch('edge-app/setAppName', name)
-        this.$store.dispatch('edge-app/getAppItem')
-          .then(response => {
-            this.detailContent = JSON.stringify(response, null, 4)
-          })
-      },
-      showDeleteApp(name) {
-        this.dialogVisible = true
-        this.$store.dispatch('edge-app/setAppName', name)
-      },
-      deleteApp() {
-        this.$store.dispatch('edge-app/deleteApp')
-          .then(_ => {
-            Message({
-              message: '删除应用成功',
-              type: 'success',
-              duration: 5 * 1000
-            })
-            this.dialogVisible = false
-            this.getList()
-          })
-      },
-      handleClose(done) {
-        this.$confirm('确认删除？')
-          .then(_ => {
-            done()
-          })
-          .catch(_ => {
-          })
-      },
-      getList() {
-        this.$store.dispatch('edge-app/getAppList').then(response => {
-          let result = []
-          response.forEach((item, _) => {
-            let images = []
-            //计算镜像
-            item.spec.containers.forEach((item_c, index_c) => {
-              images.push(
-                item_c.image
-              )
-            })
-            result.push({
-              name: item.metadata.name,
-              createTime: item.metadata.creation_timestamp,
-              labels: item.metadata.labels,
-              images: images,
-              node: item.spec.node_name,
-              status: item.status.phase === 'Running' ? 0 : 1
-            })
-          })
-          this.list = result
+      this.$store.dispatch('edge-app/setAppName', name)
+      this.$store.dispatch('edge-app/getAppItem', data)
+        .then(response => {
+          this.detailContent = JSON.stringify(response, null, 4)
         })
+    },
+    showDeleteApp(name, namespace) {
+      this.dialogVisible = true
+      let data = {
+        name, namespace
       }
+      this.$store.dispatch('edge-app/setAppName', data)
+    },
+    deleteApp() {
+      this.$store.dispatch('edge-app/deleteApp')
+        .then(_ => {
+          Message({
+            message: '删除应用成功',
+            type: 'success',
+            duration: 5 * 1000
+          })
+          this.dialogVisible = false
+          this.getList()
+        })
+    },
+    handleClose(done) {
+      this.$confirm('确认删除？')
+        .then(_ => {
+          done()
+        })
+        .catch(_ => {
+        })
+    },
+    getList() {
+      this.$store.dispatch('edge-app/getAppList').then(response => {
+        let result = []
+        response.items.forEach((item, _) => {
+          let images = []
+          //计算镜像
+          item.spec.containers.forEach((item_c, index_c) => {
+            images.push(
+              item_c.image
+            )
+          })
+          result.push({
+            name: item.metadata.name,
+            createTime: item.metadata.creationTimestamp,
+            labels: item.metadata.labels,
+            images: images,
+            node: item.spec.nodeName,
+            status: item.status.phase === 'Running' ? 0 : 1,
+            namespace: item.metadata.namespace
+          })
+        })
+        this.list = result
+      })
     }
   }
+}
 </script>
 <style scoped>
 </style>

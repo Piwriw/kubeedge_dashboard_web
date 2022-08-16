@@ -55,10 +55,10 @@
       createApp() {
         //创建Device
         return new Promise((resolve, reject) => {
-          create(
-            {
-              declare: this.code,
-            }
+          create(this.code
+            // {
+            //   declare: this.code,
+            // }
           ).then(response => {
             Message({
               message: '创建成功',

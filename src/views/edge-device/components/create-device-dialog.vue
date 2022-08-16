@@ -105,7 +105,7 @@
         this.$store.dispatch('edge-device/getDeviceModelList').then(response => {
           this.form.properties.forEach((item, index0) => {
             if (item.name === 'dm_name') {
-              response.forEach((dm, index1) => {
+              response.items.forEach((dm, index1) => {
                 item.options.push(dm.metadata.name)
               })
             }

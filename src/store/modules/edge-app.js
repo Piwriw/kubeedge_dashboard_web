@@ -6,11 +6,15 @@ import {
 } from '@/api/edge-app'
 
 const state = {
-  name: ''
+  name: '',
+  namespace: '',
 }
 const mutations = {
   SET_APPNAME: (state, name) => {
     state.name = name
+  },
+  SET_APPNAMESPACE:(state,namespace) => {
+    state.namespace = namespace
   }
 }
 const actions = {
@@ -25,9 +29,9 @@ const actions = {
     })
   },
   //应用详情
-  getAppItem({ commit, state }) {
+  getAppItem({},data) {
     return new Promise((resolve, reject) => {
-      fetchItem(state.name).then(response => {
+      fetchItem(data).then(response => {
         resolve(response)
         commit('SET_APPNAME', '')
       }).catch(error => {
@@ -39,19 +43,22 @@ const actions = {
   deleteApp({ commit, state }) {
     return new Promise((resolve, reject) => {
       let params = {
-        'pod_name': state.name
+        'name': state.name,
+        'namespace': state.namespace,
       }
       deleteApp(params).then(response => {
         commit('SET_APPNAME', '')
+        commit('SET_APPNAMESPACE','')
         resolve(response)
       }).catch(error => {
         reject(error)
       })
     })
   },
-  setAppName({ commit, state }, name) {
+  setAppName({ commit, state }, data) {
     return new Promise(resolve => {
-      commit('SET_APPNAME', name)
+      commit('SET_APPNAME', data.name)
+      commit('SET_APPNAMESPACE',data.namespace)
       resolve()
     })
   }

@@ -27,6 +27,7 @@ export function updateDeviceModel(data) {
 
 //更新设备模板
 export function updateDevice(data) {
+  console.log("data",data)
   return request({
     url: '/device/device/',
     method: 'put',
@@ -54,6 +55,7 @@ export function deleteDevice(data) {
 
 //创建设备
 export function createDevice(data) {
+  console.log("data: " ,data)
   return request({
     url: '/device/device/',
     method: 'post',

@@ -7,10 +7,10 @@ export function fetchList() {
   })
 }
 
-export function fetchItem(name) {
+export function fetchItem(data) {
   return request({
-    url: '/pod/pod/default/' + name + '/',
-    method: 'get'
+    url: '/pod/pod/' +data.namespace+'/'+ data.name + '/',
+    method: 'get',
   })
 }
 
@@ -25,8 +25,7 @@ export function create(data) {
 //删除应用
 export function deleteApp(data) {
   return request({
-    url: '/pod/pod/',
+    url: '/pod/'+data.namespace+'/'+data.name+'/',
     method: 'delete',
-    data
   })
 }
