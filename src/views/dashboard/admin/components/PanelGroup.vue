@@ -84,10 +84,11 @@
           this.nodeNum = data.length
         })
         this.$store.dispatch("edge-app/getAppList").then(data => {
-          this.appNum = data.length
+
+          this.appNum = data.items.length
         })
         this.$store.dispatch("edge-device/getDeviceList").then(data => {
-          this.deviceNum = data.length
+          this.deviceNum = data.items.length
         })
         this.$store.dispatch("edge-data/getDataList").then(data => {
           this.dataNum = data.length

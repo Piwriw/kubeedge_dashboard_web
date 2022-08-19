@@ -118,7 +118,7 @@
           .then(response => {
             this.form.properties.forEach((item, index0) => {
               if (item.name === 'rule_name') {
-                response.forEach((rule, index1) => {
+                response.items.forEach((rule, index1) => {
                   item.options.push(rule.metadata.name)
                 })
               }
