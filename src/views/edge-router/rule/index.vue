@@ -102,7 +102,7 @@
         this.$store.dispatch('edge-router/setRuleName', name)
         this.$store.dispatch('edge-router/getRuleItem')
           .then(response => {
-            this.detailContent = JSON.stringify(response, null, 4)
+            this.detailContent = JSON.stringify(response.data, null, 4)
           })
       },
       deleteRuleView(name) {
@@ -135,7 +135,7 @@
         this.$store.dispatch('edge-router/getRuleList')
           .then(response => {
             let result = []
-            response.items.forEach((item, _) => {
+            response.data.items.forEach((item, _) => {
               result.push(
                 {
                   name: item.metadata.name,

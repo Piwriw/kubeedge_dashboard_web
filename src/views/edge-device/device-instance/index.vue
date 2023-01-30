@@ -135,7 +135,7 @@
         this.$store.dispatch('edge-device/setDeviceName', name)
         this.$store.dispatch('edge-device/getDeviceItem')
           .then(response => {
-            this.detailContent = JSON.stringify(response, null, 4)
+            this.detailContent = JSON.stringify(response.data, null, 4)
           })
       },
       //删除设备展示
@@ -161,7 +161,7 @@
       getList() {
         fetchDeviceInstanceList().then(response => {
           let result = []
-          response.items.forEach((item, _) => {
+          response.data.items.forEach((item, _) => {
             result.push(
               {
                 name: item.metadata.name,

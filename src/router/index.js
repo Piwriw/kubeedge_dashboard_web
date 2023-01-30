@@ -187,20 +187,20 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/edge-ai-model',
-    component: Layout,
-    redirect: '/edge-ai-model/index',
-    hidden: false,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/edge-ai-model/index'),
-        name: 'AiModel',
-        meta: { title: '边缘AI模型', icon: 'model2', noCache: true }
-      }
-    ]
-  },
+  // {
+  //   path: '/edge-ai-model',
+  //   component: Layout,
+  //   redirect: '/edge-ai-model/index',
+  //   hidden: false,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/edge-ai-model/index'),
+  //       name: 'AiModel',
+  //       meta: { title: '边缘AI模型', icon: 'model2', noCache: true }
+  //     }
+  //   ]
+  // },
   {
     path: '/edge-data',
     component: Layout,

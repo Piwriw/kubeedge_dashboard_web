@@ -91,6 +91,7 @@
       //获取所有的节点数据
       getNodeList() {
         this.$store.dispatch('edge-node/getNodeList').then(response => {
+          response=response.data
           this.form.properties.forEach((item, index0) => {
             if (item.name === 'node_name') {
               response.forEach((node, index1) => {
@@ -103,6 +104,7 @@
       //获取所有的设备模板数据
       getDmList() {
         this.$store.dispatch('edge-device/getDeviceModelList').then(response => {
+          response=response.data
           this.form.properties.forEach((item, index0) => {
             if (item.name === 'dm_name') {
               response.items.forEach((dm, index1) => {

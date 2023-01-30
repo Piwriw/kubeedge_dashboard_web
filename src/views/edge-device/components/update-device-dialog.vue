@@ -54,7 +54,7 @@
       init() {
         this.$store.dispatch('edge-device/getDeviceItem')
           .then(response => {
-            this.twins = response.status.twins
+            this.twins = response.data.status.twins
           })
       },
       //同步设备状态
@@ -62,7 +62,6 @@
         let item = this.twins[index]
         let _temp = {}
         _temp[item['propertyName']] = item['desired']['value']
-        console.log(_temp)
         let params = {
           'desired': _temp
         }

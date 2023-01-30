@@ -85,6 +85,7 @@
       init() {
         this.$store.dispatch('edge-device/getDeviceModelItem')
           .then(response => {
+            response=response.data
             this.form.name.value = response.metadata.name
             response.spec.properties.forEach((item, _) => {
               let _temp = JSON.parse(JSON.stringify(PROPERTY_ITEM))

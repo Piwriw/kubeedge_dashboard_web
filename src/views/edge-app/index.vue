@@ -103,7 +103,7 @@ export default {
       this.$store.dispatch('edge-app/setAppName', name)
       this.$store.dispatch('edge-app/getAppItem', data)
         .then(response => {
-          this.detailContent = JSON.stringify(response, null, 4)
+          this.detailContent = JSON.stringify(response.data, null, 4)
         })
     },
     showDeleteApp(name, namespace) {
@@ -136,7 +136,7 @@ export default {
     getList() {
       this.$store.dispatch('edge-app/getAppList').then(response => {
         let result = []
-        response.items.forEach((item, _) => {
+        response.data.items.forEach((item, _) => {
           let images = []
           //计算镜像
           item.spec.containers.forEach((item_c, index_c) => {

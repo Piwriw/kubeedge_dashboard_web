@@ -88,7 +88,7 @@
         this.$store.dispatch("edge-node/getNodeList")
           .then(response => {
             let result = []
-            response.forEach((item, index) => {
+            response.data.forEach((item, index) => {
               result.push({
                 "creationTimestamp":item.metadata.creationTimestamp,
                 "name":item.metadata.name,

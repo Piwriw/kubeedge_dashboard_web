@@ -98,7 +98,7 @@
         this.$store.dispatch('edge-router/deleteRuleEndPoint').then(
           () => {
             Message({
-              message: '删除路由节点规则成功',
+              message: '删除路由节点成功',
               type: 'success',
               duration: 5 * 1000
             })
@@ -118,14 +118,14 @@
         this.$store.dispatch('edge-router/setRuleEndPointName', name)
         this.$store.dispatch('edge-router/getRuleEndPointItem')
           .then(response => {
-            this.detailContent = JSON.stringify(response, null, 4)
+            this.detailContent = JSON.stringify(response.data, null, 4)
           })
       },
       getList() {
         this.$store.dispatch('edge-router/getRuleEndPointList')
           .then(response => {
             let result = []
-            response.items.forEach((item, index) => {
+            response.data.items.forEach((item, index) => {
               result.push(
                 {
                   name: item.metadata.name,

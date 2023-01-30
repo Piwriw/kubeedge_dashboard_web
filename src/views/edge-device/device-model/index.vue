@@ -120,7 +120,7 @@
         this.$store.dispatch('edge-device/setDeviceModelName', name)
         this.$store.dispatch('edge-device/getDeviceModelItem')
           .then(response => {
-            this.detailContent = JSON.stringify(response, null, 4)
+            this.detailContent = JSON.stringify(response.data, null, 4)
           })
       },
       //更新设备模板信息
@@ -158,7 +158,7 @@
         this.$store.dispatch('edge-device/getDeviceModelList')
           .then(response => {
             let result = []
-            response.items.forEach((item, index) => {
+            response.data.items.forEach((item, index) => {
               let properties = []
               //遍历所有的字段属性
               item.spec.properties.forEach((item_prop, index_prop) => {

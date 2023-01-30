@@ -80,7 +80,7 @@
 <script>
 import {validUsername} from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
-import bgImage from '@/assets/system-images/bg2.png'
+import bgImage from '@/assets/system-images/bg3.jpg'
 
 export default {
   name: 'Login',

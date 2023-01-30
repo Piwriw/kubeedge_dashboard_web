@@ -89,10 +89,11 @@
       init() {
         this.$store.dispatch('edge-device/getDeviceItem')
           .then(response => {
-            this.twins = response.status.twins
+            this.twins = response.data.status.twins
           })
         this.$store.dispatch('edge-aimodel/getAiModelList').then(response => {
-          response.forEach((item, index) => {
+          console.log(response)
+          response.data.forEach((item, index) => {
             this.modeInfo.options.push(item.version)
           })
         })
@@ -105,6 +106,7 @@
         let params = {
           'desired': _temp
         }
+
         this.$store.dispatch('edge-device/updateDevice', params)
           .then(_ => {
             Message({

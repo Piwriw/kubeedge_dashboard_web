@@ -58,6 +58,7 @@
       getNodeItem() {
         this.$store.dispatch('edge-node/getNodeItem', this.$route.params.id)
           .then(response => {
+            response=response.data
             //获取数据返回的节点信息字段
             let nodeinfo = response.status.nodeInfo
             this.nodeInfo = {
@@ -86,14 +87,15 @@
       getNodeMetrics() {
         this.$store.dispatch('metrics/getNodeMetrics', this.$route.params.id)
           .then(response => {
-            console.log("444",response)
+            // console.log("444",response)
+            response=response.data
             // 2022-8-11
             const all=response.capacity
-            console.log("all",all)
+            // console.log("all",all)
             const usage=response.allocatable
             // let lent=usage.
             const noUsed = response.allocatable
-            console.log("noUsed",noUsed)
+            // console.log("noUsed",noUsed)
 
             let lent = noUsed.memory.length
             //单位
@@ -113,7 +115,7 @@
           .then(response => {
             let result = []
             //获取设备数据，按照节点名称过滤
-            response.forEach((item, index) => {
+            response.data.items.forEach((item, index) => {
               let nodeNameList = item.spec.nodeSelector.nodeSelectorTerms[0].matchExpressions[0].values
               if (nodeNameList.indexOf(currentNode) === -1) {
                 return
@@ -133,8 +135,8 @@
         const currentNode = this.$route.params.id
         this.$store.dispatch('edge-app/getAppList').then(response => {
           let result = []
-          response.forEach((item, index) => {
-            let eachNode = item.spec.node_name
+          response.data.items.forEach((item, index) => {
+            let eachNode = item.spec.nodeName
             if (eachNode !== currentNode) {
               return
             }
