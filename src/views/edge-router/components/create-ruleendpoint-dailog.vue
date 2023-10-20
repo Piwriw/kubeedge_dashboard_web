@@ -69,7 +69,7 @@
                 title: '路由节点配置信息',
                 desc: '路由节点配置信息'
               },
-              value: '',
+              value: '{}',
               rules: [
               ],
               placeholder: '请输入路由节点配置信息'

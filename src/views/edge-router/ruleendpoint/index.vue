@@ -58,6 +58,7 @@
       <pre>
         {{detailContent}}
       </pre>
+
     </el-dialog>
     <el-dialog
       title="创建路由节点"

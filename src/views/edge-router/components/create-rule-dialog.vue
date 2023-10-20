@@ -112,7 +112,8 @@
       init() {
         this.$store.dispatch('edge-router/getRuleEndPointList')
           .then(response => {
-            this.ruleEndpointList = response.items
+            this.ruleEndpointList = response.data.items
+
           })
       },
       submitForm(formName) {

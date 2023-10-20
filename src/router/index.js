@@ -201,6 +201,22 @@ export const constantRoutes = [
   //     }
   //   ]
   // },
+  //水果
+  // {
+  //   path: '/edge-data',
+  //   component: Layout,
+  //   redirect: '/edge-data/index',
+  //   hidden: false,
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       component: () => import('@/views/edge-data/index'),
+  //       name: 'EdgeData',
+  //       meta: { title: '边缘数据', icon: 'data', noCache: true }
+  //     }
+  //   ]
+  // },
+  //ie
   {
     path: '/edge-data',
     component: Layout,
@@ -209,7 +225,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        component: () => import('@/views/edge-data/index'),
+        component: () => import('@/views/edge-ie-data/index'),
         name: 'EdgeData',
         meta: { title: '边缘数据', icon: 'data', noCache: true }
       }

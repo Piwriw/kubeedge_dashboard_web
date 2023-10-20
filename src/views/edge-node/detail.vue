@@ -96,7 +96,8 @@
             // let lent=usage.
             const noUsed = response.allocatable
             // console.log("noUsed",noUsed)
-
+            // 63278178304
+            // 56950360380
             let lent = noUsed.memory.length
             //单位
             let unit = (noUsed.memory).substring(lent - 2, lent)

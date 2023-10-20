@@ -72,6 +72,12 @@
       <pre>
         {{ detailContent }}
       </pre>
+<!--      <json-viewer-->
+<!--        :value=detailContent-->
+<!--        :expand-depth=5-->
+<!--        copyable="true"-->
+<!--        boxed-->
+<!--        sort></json-viewer>-->
     </el-dialog>
   </div>
 </template>
