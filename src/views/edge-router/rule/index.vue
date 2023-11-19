@@ -136,7 +136,6 @@ export default {
       this.$store.dispatch('edge-router/getRuleList')
         .then(response => {
           let result = []
-          console.log(response)
           response.data.items.forEach((item, _) => {
             result.push(
               {
@@ -149,7 +148,6 @@ export default {
               }
             )
           })
-
           this.list = result
         })
     }

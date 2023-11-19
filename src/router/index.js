@@ -41,8 +41,8 @@ import Layout from '@/layout'
  */
 export const constantRoutes = [
   {
-    path: '/login',
-    component: () => import('@/views/login/index'),
+      path: '/login',
+    component: () => import('@/views/login/index_new'),
     hidden: true
   },
   {
@@ -69,7 +69,7 @@ export const constantRoutes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+        meta: {title: 'Dashboard', icon: 'dashboard', affix: true}
       }
     ]
   },
@@ -83,20 +83,20 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/edge-node/index'),
         name: 'EdgeNode',
-        meta: { title: '边缘节点', icon: 'nodejs', noCache: true }
+        meta: {title: '边缘节点', icon: 'nodejs', noCache: true}
       },
       {
         path: 'detail/:id(.+)',
         component: () => import('@/views/edge-node/detail'),
         name: 'EditArticle',
-        meta: { title: '边缘节点详情', noCache: true, activeMenu: '/edge-node/index' },
+        meta: {title: '边缘节点详情', noCache: true, activeMenu: '/edge-node/index'},
         hidden: true
       },
       {
         path: 'edge-node/create',
         component: () => import('@/views/edge-node/create'),
         name: 'EditCreate',
-        meta: { title: '添加边缘节点', noCache: true, activeMenu: '/edge-node/index' },
+        meta: {title: '添加边缘节点', noCache: true, activeMenu: '/edge-node/index'},
         hidden: true
       }
     ]
@@ -107,33 +107,33 @@ export const constantRoutes = [
     // tag点击跳转用
     redirect: '/edge-device/device-model',
     hidden: false,
-    meta: { title: '设备管理', icon: 'device-fill', noCache: true },
+    meta: {title: '设备管理', icon: 'device-fill', noCache: true},
     children: [
       {
         path: 'device-model',
         component: () => import('@/views/edge-device/device-model/index'),
         name: 'DeviceModel',
-        meta: { title: '设备模板', noCache: true }
+        meta: {title: '设备模板', noCache: true}
       },
       {
         path: 'device-instance',
         component: () => import('@/views/edge-device/device-instance/index'),
         name: 'DevicesInstance',
-        meta: { title: '设备实例', noCache: true }
+        meta: {title: '设备实例', noCache: true}
       },
       {
         path: 'device-model/create',
         component: () => import('@/views/edge-device/device-model/create'),
         name: 'DevicesModelCreate',
         hidden: true,
-        meta: { title: '创建设备模板', noCache: true, activeMenu: '/edge-device/device-model' }
+        meta: {title: '创建设备模板', noCache: true, activeMenu: '/edge-device/device-model'}
       },
       {
         path: 'device-model/update',
         component: () => import('@/views/edge-device/device-model/update'),
         name: 'DevicesModelUpdate',
         hidden: true,
-        meta: { title: '更新设备模板', noCache: true, activeMenu: '/edge-device/device-model' }
+        meta: {title: '更新设备模板', noCache: true, activeMenu: '/edge-device/device-model'}
       }
     ]
   },
@@ -143,19 +143,41 @@ export const constantRoutes = [
     // tag点击跳转用
     redirect: '/edge-router/ruleendpoint',
     hidden: false,
-    meta: { title: '路由管理', icon: 'device-fill', noCache: true },
+    meta: {title: '路由管理', icon: 'device-fill', noCache: true},
     children: [
       {
         path: 'ruleendpoint',
         component: () => import('@/views/edge-router/ruleendpoint/index'),
         name: 'DevicesInstance',
-        meta: { title: '路由节点', noCache: true }
+        meta: {title: '路由节点', noCache: true}
       },
       {
         path: 'rule',
         component: () => import('@/views/edge-router/rule/index'),
         name: 'DeviceModel',
-        meta: { title: '路由规则', noCache: true }
+        meta: {title: '路由规则', noCache: true}
+      }
+    ]
+  },
+  {
+    path: '/resource',
+    component: Layout,
+    // tag点击跳转用
+    redirect: '/resource/configmap',
+    hidden: false,
+    meta: {title: 'Resource', icon: 'data', noCache: true},
+    children: [
+      {
+        path: 'configmap',
+        component: () => import('@/views/resource/configmap/index'),
+        name: 'ConfigMap',
+        meta: {title: 'ConfigMap', icon: 'cm', noCache: true}
+      },
+      {
+        path: 'secret',
+        component: () => import('@/views/resource/secret/index'),
+        name: 'Secret',
+        meta: {title: 'Secret', icon: 'secret', noCache: true}
       }
     ]
   },
@@ -169,21 +191,21 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/edge-app/index'),
         name: 'Applications',
-        meta: { title: '边缘应用', icon: 'application', noCache: true }
+        meta: {title: '边缘应用', icon: 'application', noCache: true}
       },
       {
         path: 'detail/:id(.+)',
         component: () => import('@/views/edge-app/detail'),
         name: 'Applications',
         hidden: true,
-        meta: { title: '应用详情', noCache: true, activeMenu: '/edge-app/index' }
+        meta: {title: '应用详情', noCache: true, activeMenu: '/edge-app/index'}
       },
       {
         path: 'create',
         component: () => import('@/views/edge-app/create'),
         name: 'ApplicationCreate',
         hidden: true,
-        meta: { title: '创建应用', noCache: true, activeMenu: '/edge-app/index' }
+        meta: {title: '创建应用', noCache: true, activeMenu: '/edge-app/index'}
       }
     ]
   },
@@ -201,36 +223,42 @@ export const constantRoutes = [
   //     }
   //   ]
   // },
-  //水果
-  // {
-  //   path: '/edge-data',
-  //   component: Layout,
-  //   redirect: '/edge-data/index',
-  //   hidden: false,
-  //   children: [
-  //     {
-  //       path: 'index',
-  //       component: () => import('@/views/edge-data/index'),
-  //       name: 'EdgeData',
-  //       meta: { title: '边缘数据', icon: 'data', noCache: true }
-  //     }
-  //   ]
-  // },
-  //ie
   {
     path: '/edge-data',
     component: Layout,
+    // tag点击跳转用
     redirect: '/edge-data/index',
     hidden: false,
+    meta: {title: '边缘数据', icon: 'data', noCache: true},
     children: [
       {
-        path: 'index',
-        component: () => import('@/views/edge-ie-data/index'),
+        path: 'edge_data',
+        component: () => import('@/views/edge-data/index'),
         name: 'EdgeData',
-        meta: { title: '边缘数据', icon: 'data', noCache: true }
+        meta: {title: '果蔬识别边缘数据', noCache: true}
+      },
+      {
+        path: 'edge_ie_data',
+        component: () => import('@/views/edge-ie-data/index'),
+        name: 'EdgeIEData',
+        meta: {title: 'IE边缘数据', noCache: true}
       }
     ]
-  }
+  },
+  // {
+  // path: '/edge-data',
+  // component: Layout,
+  // redirect: '/edge-data/index',
+  // hidden: false,
+  // children: [
+  //   {
+  //     path: 'index',
+  //     component: () => import('@/views/edge-data/index'),
+  //     name: 'EdgeData',
+  //     meta: { title: '果蔬边缘数据', icon: 'data', noCache: true }
+  //   },
+  // ]
+  // }
 ]
 
 /**
@@ -251,12 +279,12 @@ export const asyncRoutes = [
   //   ]
   // },
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {path: '*', redirect: '/404', hidden: true}
 ]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes.concat(asyncRoutes)
 })
 

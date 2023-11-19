@@ -58,7 +58,6 @@
 
 <script>
 import CountTo from 'vue-count-to'
-import {fetchList} from "@/api/ie-data";
 
 export default {
   components: {
@@ -69,11 +68,7 @@ export default {
       nodeNum: 0,
       appNum: 0,
       deviceNum: 0,
-      dataNum: 0,
-      pageInfo : {
-        page: 1,
-        size: 10,
-      }
+      dataNum: 0
     }
   },
   created() {
@@ -97,19 +92,10 @@ export default {
         const data = res.data
         this.deviceNum = data.items.length
       })
-
-      fetchList(this.pageInfo).then(res => {
-        // const data = res.data
-        // this.dataNum = data.length
-        this.dataNum = res.data.total
+      this.$store.dispatch("edge-data/getDataList").then(res => {
+        const data = res.data
+        this.dataNum = data.length
       })
-      // this.$store.dispatch("ie-data/getDataList").then(res => {
-      //   console.log(res)
-      //   // const data = res.data
-      //   // this.dataNum = data.length
-      //   this.dataNum = res.data.total
-      // })
-
     }
   }
 }
